@@ -1,25 +1,35 @@
 import drawGraph
 import APIDataLoading
-import tkinter as tk 
+import tkinter as tk
 from tkinter import messagebox,ttk
+def submitDate(text):
+    print(APIDataLoading.getApiData("Today"))
 class MainApp(tk.Tk):
     def __init__(self):
         super().__init__()
+        menuFrame = tk.Frame(self)
         #window config
         self.title("Main menu")
-        self.geometry("300x150")
+        self.geometry("600x300")
         #ADDING WIDGETS
         #label and entry for input
-        inputLabel = ttk.Label(self, text="Input shortcuts for cryptocurrencies: (ex. btc,eth,...)"); inputLabel.pack()
-        inputEntry = ttk.Entry(self); inputEntry.pack()
+        inputLabel = ttk.Label(menuFrame, text="Input shortcuts for cryptocurrencies: (ex. btc,eth,...)"); inputLabel.pack()
+        inputEntry = ttk.Entry(menuFrame); inputEntry.pack()
         #label and entry for input
-        outputLabel = ttk.Label(self, text="Output shortcuts for cryptocurrencies: (ex. btc, eth)"); outputLabel.pack()
-        outputEntry = ttk.Entry(self); outputEntry.pack()
+        outputLabel = ttk.Label(menuFrame, text="Output shortcuts for cryptocurrencies: (ex. btc, eth)"); outputLabel.pack()
+        outputEntry = ttk.Entry(menuFrame); outputEntry.pack()
         #label and selector for time interval
-        choices = ["1 year", "6 months", "3 months", "1 months", "1 day"]
-        timeSelectorLabel = ttk.Label(self, text="Choose time interval for data output:"); timeSelectorLabel.pack()
-        timeSelector = ttk.Combobox(self, values = choices); timeSelector.pack()
-
+        choosenDate = tk.StringVar()
+        choosenDate.set("Today")
+        timeSelectorLabel = ttk.Label(menuFrame, text="Choose time interval for data output:"); timeSelectorLabel.pack()
+        timeSelector = tk.OptionMenu(menuFrame,choosenDate, *["1 year", "6 months", "3 months", "1 month", "Today"]); timeSelector.pack()
+        #test label for doge in usd and btc
+        testLabel = ttk.Label(menuFrame, text="Crypto: "+str(APIDataLoading.getApiData("Today"))); testLabel.pack()
+        #generate button
+        submitButton = ttk.Button(menuFrame, text="Show graph",command=lambda: submitDate(choosenDate.get()))
+        submitButton.pack()
+        menuFrame.pack()
+        
 if __name__=="__main__" :
     app = MainApp()
-    app.mainloop()
+    app.mainloop()          
