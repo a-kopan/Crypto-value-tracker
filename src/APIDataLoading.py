@@ -25,4 +25,4 @@ def getApiData(time):
     #prices = [x.get('high') for x in data]
     [print(x) for x in prices]
 if __name__ == "__main__":
-    print("")
+    getApiData()
