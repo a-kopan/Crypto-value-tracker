@@ -2,8 +2,9 @@ import drawGraph
 import APIDataLoading
 import tkinter as tk
 from tkinter import messagebox,ttk
-def submitDate(text):
-    print(APIDataLoading.getApiData("Today"))
+
+def submitDate(date,input,output):
+    print(APIDataLoading.getApiData(date,input,output))
 class MainApp(tk.Tk):
     def __init__(self):
         super().__init__()
@@ -13,20 +14,29 @@ class MainApp(tk.Tk):
         self.geometry("600x300")
         #ADDING WIDGETS
         #label and entry for input
-        inputLabel = ttk.Label(menuFrame, text="Input shortcuts for cryptocurrencies: (ex. btc,eth,...)"); inputLabel.pack()
-        inputEntry = ttk.Entry(menuFrame); inputEntry.pack()
+        inputLabel = ttk.Label(menuFrame, text="Input shortcuts for cryptocurrencies: (ex. btc,eth,...)"); 
+        inputLabel.pack()
+        inputEntry = ttk.Entry(menuFrame); 
+        inputEntry.pack()
         #label and entry for input
-        outputLabel = ttk.Label(menuFrame, text="Output shortcuts for cryptocurrencies: (ex. btc, eth)"); outputLabel.pack()
-        outputEntry = ttk.Entry(menuFrame); outputEntry.pack()
+        outputLabel = ttk.Label(menuFrame, text="Output shortcuts for cryptocurrencies: (ex. btc, eth)"); 
+        outputLabel.pack()
+        outputEntry = ttk.Entry(menuFrame); 
+        outputEntry.pack()
         #label and selector for time interval
         choosenDate = tk.StringVar()
         choosenDate.set("Today")
-        timeSelectorLabel = ttk.Label(menuFrame, text="Choose time interval for data output:"); timeSelectorLabel.pack()
-        timeSelector = tk.OptionMenu(menuFrame,choosenDate, *["1 year", "6 months", "3 months", "1 month", "Today"]); timeSelector.pack()
-        #test label for doge in usd and btc
-        testLabel = ttk.Label(menuFrame, text="Crypto: "+str(APIDataLoading.getApiData("Today"))); testLabel.pack()
+        timeSelectorLabel = ttk.Label(menuFrame, text="Choose time interval for data output:"); 
+        timeSelectorLabel.pack()
+        timeSelector = tk.OptionMenu(menuFrame,choosenDate, *["1 year", "6 months", "3 months", "1 month", "Today"]);
+        timeSelector.pack()
         #generate button
-        submitButton = ttk.Button(menuFrame, text="Show graph",command=lambda: submitDate(choosenDate.get()))
+        submitButton = ttk.Button(menuFrame,
+                                  text="Show graph",
+                                  command=lambda: submitDate(choosenDate.get(),
+                                                             inputEntry.get(),
+                                                             outputEntry.get())
+                                  )
         submitButton.pack()
         menuFrame.pack()
         

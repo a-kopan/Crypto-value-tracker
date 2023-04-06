@@ -1,4 +1,4 @@
-import pandas
+import numpy
 import matplotlib
 
 def drawGraph():
