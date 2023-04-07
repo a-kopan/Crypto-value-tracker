@@ -1,0 +1,6 @@
+mplcursors
+requests
+json
+numpy
+matplotlib.pyplot
+tkinter

@@ -1,8 +1,5 @@
 import json
 import requests
-from http.client import responses
-
-
 def getApiData(time, cryptoOfChoice, convertInto):
     #loading up the key from API_KEY.txt file
     API_KEY = open("src/API_KEY.txt","r").read()
@@ -21,7 +18,6 @@ def getApiData(time, cryptoOfChoice, convertInto):
         loadedData = requests.get(requestURL)
         apiOutput = loadedData.json()
         dataArray = apiOutput.get("Data").get("Data")
-        print(dataArray)
         counter = 0
         for element in dataArray:
             holder = {currency:element.get("high")}
