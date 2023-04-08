@@ -27,8 +27,8 @@ def drawGraph(time, cryptoOfChoice, convertInto):
     #hovering on the plots
     def show_annotation(sel):
         index = sel.target.index
-        x, y = sel.target
-        sel.annotation.set_text(f"Days ago: ={int(x)}, {convertInto}={y:.2f}")
+        time, curr = sel.target
+        sel.annotation.set_text(f"Days ago: {int(time)}, {convertInto}: {curr:.2f}")
     annotations = [f"x={xval:.2f}, y={yval:.2f}" for xval, yval in zip(x_points, y_points)]
     lines = plt.gca().get_lines()
     mplcursors.cursor(lines, hover=True).connect("add", show_annotation)

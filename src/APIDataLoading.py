@@ -2,7 +2,7 @@ import json
 import requests
 def getApiData(time, cryptoOfChoice, convertInto):
     #loading up the key from API_KEY.txt file
-    API_KEY = open("src/API_KEY.txt","r").read()
+    API_KEY = open("API_KEY.txt","r").read()
     #check if input is an number
     try:
         time = int(time)
